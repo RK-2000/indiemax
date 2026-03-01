@@ -3,6 +3,7 @@ import FeaturedCollectionSection from "@/components/sections/FeaturedCollectionS
 import UpcomingDropSection from "@/components/sections/UpcomingDropSection";
 import ArtisanSpotlightSection from "@/components/sections/ArtisanSpotlightSection";
 import BrandValuesSection from "@/components/sections/BrandValuesSection";
+import SectionDivider from "@/components/sections/SectionDivider";
 
 // Sample data - In production, this would come from Sanity CMS
 const sampleFeaturedCollection = {
@@ -89,8 +90,8 @@ export default function Home() {
   return (
     <div className="-mt-16 md:-mt-20">
       <HeroSection
-        title="Handcrafted Heritage"
-        subtitle="Celebrating India's rich textile traditions through artisanal fashion. Each piece tells a story of craftsmanship, culture, and conscious creation."
+        title="Hand Block Prints · Indian Silhouettes"
+        subtitle="Modern Everyday Looks"
       />
       
       <FeaturedCollectionSection
@@ -101,6 +102,8 @@ export default function Home() {
         craftTechnique={sampleFeaturedCollection.craftTechnique}
         products={sampleFeaturedCollection.products}
       />
+
+      <SectionDivider style="craft" fromColor="bg-ivory" />
 
       <UpcomingDropSection
         name={sampleUpcomingDrop.name}
