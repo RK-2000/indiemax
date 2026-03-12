@@ -126,13 +126,6 @@ Use Payload Admin (`/admin`) to:
 
 ## Deployment
 
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import the project in [Vercel](https://vercel.com)
-3. Add environment variables
-4. Deploy!
-
 ### Environment Variables for Production
 
 ```env
