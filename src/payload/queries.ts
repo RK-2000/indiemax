@@ -84,7 +84,7 @@ export async function getCollectionBySlug(slug: string) {
   
   if (!result.docs[0]) return null
 
-  const collection = result.docs[0]
+  const collection = result.docs[0] as any
   
   // Get products in this collection
   const products = await payload.find({
@@ -171,7 +171,7 @@ export async function getArtisanBySlug(slug: string) {
 
   if (!result.docs[0]) return null
 
-  const artisan = result.docs[0]
+  const artisan = result.docs[0] as any
 
   // Get products by this artisan
   const products = await payload.find({
