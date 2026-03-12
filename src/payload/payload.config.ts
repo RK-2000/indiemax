@@ -46,7 +46,7 @@ export default buildConfig({
   },
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URI || path.resolve(dirname, '../../database.sqlite'),
+      url: process.env.DATABASE_URI || `file:${path.resolve(dirname, '../../database.sqlite')}`,
     },
   }),
   sharp,
