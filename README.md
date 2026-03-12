@@ -1,6 +1,6 @@
 # IndieMax - Handcrafted Heritage Prints
 
-A modern fashion brand website celebrating India's rich textile heritage through artisanal fashion. Built with Next.js 14 and Sanity CMS.
+A modern fashion brand website celebrating India's rich textile heritage through artisanal fashion. Built with Next.js and Payload CMS.
 
 ![IndieMax](https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1200&q=80)
 
@@ -12,13 +12,14 @@ A modern fashion brand website celebrating India's rich textile heritage through
 - **Product Catalog** - Full product details with image gallery, sizing, and stock indicators
 - **Countdown Timer** - Build anticipation for limited drops
 - **Newsletter Signup** - Capture leads for drop notifications
-- **Sanity CMS** - Easy content management for non-technical users
+- **Payload CMS** - Self-hosted, TypeScript-native headless CMS
 - **Responsive Design** - Optimized for all devices
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
-- **CMS**: Sanity
+- **Framework**: Next.js (App Router)
+- **CMS**: Payload CMS
+- **Database**: SQLite (can be switched to PostgreSQL/MongoDB)
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
@@ -33,15 +34,14 @@ cd indiemax
 npm install
 ```
 
-### 2. Set Up Sanity
+### 2. Set Up Environment
 
-1. Create a new project at [sanity.io/manage](https://www.sanity.io/manage)
-2. Copy your project ID and dataset name
-3. Create a `.env.local` file:
+Create a `.env.local` file:
 
 ```env
-NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
-NEXT_PUBLIC_SANITY_DATASET=production
+PAYLOAD_SECRET=your-super-secret-key-change-in-production
+DATABASE_URI=file:./database.sqlite
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 ### 3. Run Development Server
@@ -52,9 +52,11 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to see the website.
 
-### 4. Access Sanity Studio
+### 4. Access Payload Admin
 
-Visit [http://localhost:3000/studio](http://localhost:3000/studio) to manage content.
+Visit [http://localhost:3000/admin](http://localhost:3000/admin) to manage content.
+
+On first visit, you'll be prompted to create an admin user.
 
 ## Project Structure
 
@@ -68,7 +70,7 @@ src/
 │   ├── artisans/          # Artisan pages
 │   ├── heritage/          # About/Heritage page
 │   ├── contact/           # Contact page
-│   └── studio/            # Sanity Studio
+│   └── (payload)/         # Payload Admin
 ├── components/            # React components
 │   ├── sections/          # Page sections (Hero, Featured, etc.)
 │   ├── Header.tsx         # Site header
@@ -77,16 +79,24 @@ src/
 │   ├── CollectionCard.tsx # Collection card component
 │   ├── ArtisanCard.tsx    # Artisan card component
 │   └── CountdownTimer.tsx # Countdown for drops
-└── sanity/
-    ├── schemas/           # Content type definitions
-    └── lib/               # Sanity client & utilities
+└── payload/
+    ├── collections/       # Collection configurations
+    ├── globals/           # Global configurations
+    ├── payload.config.ts  # Main Payload config
+    ├── client.ts          # Payload client utilities
+    └── queries.ts         # Data fetching functions
 ```
 
-## Content Types (Sanity Schemas)
+## Content Types (Payload Collections)
 
 - **Collection** - Fashion collections with stories, drop dates, artisan credits
 - **Product** - Individual pieces with images, pricing, stock, sizing
 - **Artisan** - Craftsperson profiles with their stories and craft process
+- **Media** - Image uploads and media files
+- **Newsletter** - Subscriber list management
+
+## Globals
+
 - **Site Settings** - Global site configuration (logo, contact info, etc.)
 - **Announcement** - Homepage banners and alerts
 
@@ -108,7 +118,7 @@ Edit `src/app/globals.css` to modify the color palette:
 
 ### Content
 
-Use Sanity Studio (`/studio`) to:
+Use Payload Admin (`/admin`) to:
 - Create and manage collections
 - Add products with images and details
 - Create artisan profiles
@@ -126,10 +136,12 @@ Use Sanity Studio (`/studio`) to:
 ### Environment Variables for Production
 
 ```env
-NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
-NEXT_PUBLIC_SANITY_DATASET=production
+PAYLOAD_SECRET=generate-a-secure-random-string
+DATABASE_URI=file:./database.sqlite
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
+
+**Note**: For production, consider using PostgreSQL or MongoDB instead of SQLite.
 
 ## Future Enhancements
 

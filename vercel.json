@@ -6,13 +6,13 @@
   "installCommand": "npm install",
   "regions": ["bom1"],
   "env": {
-    "NEXT_PUBLIC_SANITY_PROJECT_ID": "@sanity_project_id",
-    "NEXT_PUBLIC_SANITY_DATASET": "@sanity_dataset",
+    "PAYLOAD_SECRET": "@payload_secret",
+    "DATABASE_URI": "@database_uri",
     "NEXT_PUBLIC_SITE_URL": "@site_url"
   },
   "headers": [
     {
-      "source": "/studio/(.*)",
+      "source": "/admin/(.*)",
       "headers": [
         {
           "key": "X-Frame-Options",
@@ -36,12 +36,6 @@
           "value": "1; mode=block"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/studio/:path*",
-      "destination": "/studio/:path*"
     }
   ]
 }
